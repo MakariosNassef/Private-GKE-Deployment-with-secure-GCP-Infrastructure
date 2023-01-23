@@ -12,3 +12,8 @@ module "network_module" {
   restricted-subnet-name = "restricted-subnet"
 }
 
+module "gke_cluster" {
+  source = "./cluster"
+  network_vpc_name= module.network_module.out_vpc_name
+  sub_network_name= module.network_module.out_restricted_name
+}

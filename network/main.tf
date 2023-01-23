@@ -56,6 +56,12 @@ resource "google_compute_instance" "private-management-vm" {
       nat_ip = google_compute_address.nat_ip.address
     }
   }
+  service_account {
+    email = google_service_account.mac-service-account.email
+    scopes    = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  }
 }
 
 resource "google_compute_router" "router" {

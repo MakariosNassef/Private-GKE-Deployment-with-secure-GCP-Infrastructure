@@ -1,114 +1,44 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
+# Project Overview
+This project creates a virtual private cloud (VPC) on Google Cloud Platform (GCP) with two subnets: a management subnet and a restricted subnet.
 
-<h3 align="center">Project Title</h3>
+## Management Subnet
+The management subnet contains the following resources:
 
-<div align="center">
+## NAT gateway
+Private virtual machine (VM)
+Restricted Subnet
+  - The restricted subnet contains the following resources:
+      - Private standard GKE cluster (private control plane)
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+## Constraints
+The restricted subnet must not have access to the internet
+All images deployed on GKE must come from GCR or Artifacts registry.
+The VM must be private.
+Deployment must be exposed to public internet with a public HTTP load balancer.
+All infrastructure is to be created on GCP using Terraform.
+Deployment on GKE can be done by Terraform or manually by kubectl tool.
+The code to be built/dockerized and pushed to GCR is located at: https://github.com/atefhares/DevOps-Challenge-Demo-Code
+Do not use the default compute service account while creating the GKE cluster. Create a custom service account and attach it to the nodes.
+Only the management subnet can connect to the GKE cluster.
 
-</div>
+### Usage
+  - Clone the repository from https://github.com/atefhares/DevOps-Challenge-Demo-Code
+  - Install terraform
+  - Run terraform init to initialize the project
+  - Run terraform plan to preview the changes that will be made
+  - Run terraform apply to create the resources
+  - Run kubectl commands to deploy the application on GKE
+  - To delete the resources, run terraform destroy
+  - Note: Make sure you have the correct credentials set up to authenticate with GCP before running the terraform commands.
+   
+## Additional Steps
+  - Build and push the Docker image of the application to GCR or Artifacts registry.
+  - Create a custom service account for the GKE cluster, and assign the appropriate roles to it.
+  - Use the custom service account while creating the GKE cluster.
+  - Create a public HTTP load balancer to expose the deployment to the public internet.
+  - Configure the management subnet to have access to the GKE cluster and the restricted subnet to not have access to the internet.
+  - Update the application deployment files with the correct image repository and tag.
+  - Use kubectl to deploy the application on the GKE cluster.
 
----
-
-<p align="center"> Few lines describing your project.
-    <br> 
-</p>
-
-## 📝 Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
-
-## 🧐 About <a name = "about"></a>
-
-Write about 1-2 paragraphs describing the purpose of your project.
-
-## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
-
-## ✍️ Authors <a name = "authors"></a>
-
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+## Conclusion
+This project demonstrates the use of Terraform to provision a VPC and its resources, and the use of GKE to deploy a private containerized application. The project also showcases the use of custom service accounts, GCR and public load balancer. By following the instructions above, you should be able to recreate the same infrastructure and deploy the application on GCP.
