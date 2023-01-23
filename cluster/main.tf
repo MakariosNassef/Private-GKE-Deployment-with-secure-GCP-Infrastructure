@@ -32,6 +32,9 @@ resource "google_container_cluster" "private-cluster" {
   }
 }
 
+
+
+# node pool collection of nodes in GCP
 resource "google_container_node_pool" "private-cluster-node-pool" {
   name       = "private-cluster-node-pool"
   location   = "asia-east2-a"
@@ -48,10 +51,11 @@ resource "google_container_node_pool" "private-cluster-node-pool" {
     machine_type = "e2-micro"
     disk_type    = "pd-standard"
     disk_size_gb = 10
-    image_type   = "cos_containerd"
+    image_type   = "ubuntu_containerd"
     service_account = google_service_account.gke-cluster-service.email
     oauth_scopes    = [
       "https://www.googleapis.com/auth/cloud-platform"
+
     ]
   }
 }

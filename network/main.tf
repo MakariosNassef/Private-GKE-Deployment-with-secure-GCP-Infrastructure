@@ -23,7 +23,7 @@ resource "google_compute_firewall" "management_subnet_firewall" {
   network = google_compute_network.vpc.id
   direction = "INGRESS"
   source_ranges = ["35.235.240.0/20"]
-  #target_tags = ["management-vm"]
+  target_tags = ["management-vm"]
   priority = 100
   allow {
     protocol = "tcp"
@@ -49,7 +49,7 @@ resource "google_compute_instance" "private-management-vm" {
   metadata = {
   enable-oslogin = "TRUE"
   }
-  #tags = ["management-vm"]
+  tags = ["management-vm"]
   network_interface {
     subnetwork = google_compute_subnetwork.management.id
     access_config {
