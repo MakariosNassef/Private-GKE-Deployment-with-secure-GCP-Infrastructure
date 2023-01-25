@@ -40,12 +40,10 @@ resource "google_container_node_pool" "private-cluster-node-pool" {
   location   = "asia-east2-a"
   cluster    = google_container_cluster.private-cluster.name
   node_count = 1
-
   # upgrade_settings {
   #   max_surge       = 1
   #   max_unavailable = 0
   # }
-
   node_config {
     preemptible  = true
     machine_type = "e2-micro"
