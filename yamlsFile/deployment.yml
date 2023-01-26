@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: my-app
+  template:
+    metadata:
+      labels:
+        name: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: asia.gcr.io/iti-makarios/macz:007
+        env:
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_HOST
+          value: redis
+        - name: ENVIRONMENT
+          value: DEV
+        - name: PORT
+          value: "8000"
+        - name: REDIS_DB
+          value: "0"
+        ports:
+        - containerPort: 80

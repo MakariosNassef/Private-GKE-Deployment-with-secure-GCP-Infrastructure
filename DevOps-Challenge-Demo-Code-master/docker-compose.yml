@@ -1,13 +1,13 @@
-version: "3.9"
+version: "3.6"
 services:
   web:
     build: .
     depends_on: 
       - redis
-    ports: 
+    ports:
       - "${PORT}:${PORT}"
     environment:
-      - ENVIRONMENT=${ENV_TYPE}
+      - ENVIRONMENT=DEV
       - HOST=localhost
       - PORT=${PORT}
       - REDIS_HOST=${REDIS_HOST}
